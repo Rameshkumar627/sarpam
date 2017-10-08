@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_hospital_employee_form">
+        <field name="name">hospital.employee.form</field>
+        <field name="model">hospital.employee</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+                <header>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+
+                    <separator string="Employee Database" style="text-align:center;"/>
+
+                    <field name="id" invisible="1"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                                <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;active&quot;}"/>
+                            </button>
+                        </div>
+                        <field name="image" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;}"/>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" required="1"/></h1>
+                            <field name="employee_uid" invisible="1"/>
+                            <label for="employee_uid" class="oe_edit_only"/>
+                            <h2><field name="employee_uid"/></h2>
+                        </div>
+
+                    <!--Notebook Pages-->
+                    <notebook>
+                        <page string="Official Information">
+                            <group col="4">
+                                <field name="date_of_join"/>
+                                <field name="employee_type"/>
+                                <field name="date_of_exit"/>
+                                <field name="position"/>
+                                <field name="direct_reportee"/>
+                                <field name="phone_primary"/>
+                                <field name="subordinates" widget="many2many_tags"/>
+                                <field name="email"/>
+                            </group>
+                        </page>
+
+                        <page string="Personal Information">
+                            <group col="4">
+                                <field name="date_of_birth"/>
+                                <field name="age"/>
+                                <field name="sex"/>
+                                <field name="marital_status"/>
+                                <field name="phone_secondary"/>
+                                <field name="pan"/>
+                                <field name="aadhar_card"/>
+                                <field name="bank_name"/>
+                                <field name="account_no"/>
+                                <field name="blood_group"/>
+                                <field name="allergic_towards"/>
+                                <field name="emergency_contact"/>
+                            </group>
+
+                            <field name="contact_address"/>
+                        </page>
+
+                        <page string="Educational Information">
+                            <field name="education"/>
+                            <field name="experience"/>
+                            <field name="awards"/>
+                        </page>
+
+                        <page string="HR Information">
+                            <group col="4">
+                                <field name="permission_approvar"/>
+                                <field name="leave_approvar"/>
+                                <field name="overtime_approvar"/>
+                            </group>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_hospital_employee_tree">
+    <field name="name">hospital.employee.tree</field>
+    <field name="model">hospital.employee</field>
+    <field name="arch" type="xml">
+        <tree string="Employee">
+            <field name="title"/>
+            <field name="position"/>
+            <field name="name"/>
+            <field name="employee_uid"/>
+            <field name="employee_type"/>
+            <field name="date_of_join"/>
+            <field name="date_of_exit"/>
+            <field name="phone_primary"/>
+            <field name="phone_secondary"/>
+            <field name="email"/>
+            <field name="pan"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--search view-->
+    <record model="ir.ui.view" id="view_hospital_employee_search">
+    <field name="name">hospital.employee.tree</field>
+    <field name="model">hospital.employee</field>
+    <field name="arch" type="xml">
+        <search string="Employee">
+            <field name="name"/>
+            <field name="employee_uid"/>
+            <field name="position"/>
+            <filter string="Employee Type" context="{'group_by':'employee_type'}"/>
+            <filter string="Title" context="{'group_by':'title'}"/>
+            <filter string="Position" context="{'group_by':'position'}"/>
+        </search>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_hospital_employee">
+        <field name="name">Employee</field>
+        <field name="res_model">hospital.employee</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a Employee.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Employee"
+              id="menu_hospital_employee"
+              action="action_hospital_employee"
+              parent="hospital_employee"
+              sequence="10"/>
+
+</odoo>

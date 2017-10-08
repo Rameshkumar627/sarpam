@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequences for product.product -->
+        <record id="seq_product_product" model="ir.sequence">
+            <field name="name">Product</field>
+            <field name="code">product.product</field>
+            <field name="prefix"/>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for product.pharmacy -->
+        <record id="seq_product_pharmacy" model="ir.sequence">
+            <field name="name">Pharmacy</field>
+            <field name="code">product.pharmacy</field>
+            <field name="prefix">PHM/</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

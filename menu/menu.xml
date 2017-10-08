@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Menu-->
+    <menuitem name="Employee" id="hospital_employee" sequence="10" web_icon="sarpam,static/description/employee.png"/>
+    <menuitem name="Hospital" id="hospital_hospital" sequence="20" web_icon="sarpam,static/description/hospital.png"/>
+    <menuitem name="Pharmacy" id="hospital_pharmacy" sequence="30" web_icon="sarpam,static/description/pharmacy.png"/>
+
+</odoo>
