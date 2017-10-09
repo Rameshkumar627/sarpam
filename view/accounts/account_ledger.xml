@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_hospital_account_ledger_form">
+        <field name="name">hospital.account.ledger.form</field>
+        <field name="model">hospital.account.ledger</field>
+        <field name="arch" type="xml">
+            <form string="Ledger Entries">
+                <sheet>
+                    <separator string="Ledger" style="text-align:center;"/>
+                    <h2><field name="name" readonly="1"/></h2>
+                    <notebook>
+                        <page string="Ledger Details">
+                            <field name="ledger_line_ids" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="ledger_id"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="reference"/>
+                                    <field name="description"/>
+                                    <field name="credit"/>
+                                    <field name="debit"/>
+                                </tree>
+                            </field>
+                        <field name="comment" placeholder="Comment"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_hospital_account_ledger_tree">
+    <field name="name">hospital.account.ledger.tree</field>
+    <field name="model">hospital.account.ledger</field>
+    <field name="arch" type="xml">
+        <tree string="Ledger Entries">
+            <field name="name"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_hospital_account_ledger">
+        <field name="name">Ledger Entries</field>
+        <field name="res_model">hospital.account.ledger</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Ledger Entries"
+              id="menu_hospital_account_ledger"
+              action="action_hospital_account_ledger"
+              parent="hospital_accounts"
+              sequence="10"/>
+
+</odoo>

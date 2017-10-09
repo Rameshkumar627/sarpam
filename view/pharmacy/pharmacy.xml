@@ -9,6 +9,7 @@
             <form string="Pharmacy">
                 <header>
                     <field name="state" widget="statusbar"/>
+                    <button name="payment_made_button" string="Make Payment" type="object"/>
                 </header>
                 <sheet>
                     <separator string="Pharmacy" style="text-align:center;"/>
@@ -18,6 +19,7 @@
                         <field name="date"/>
                         <field name="phone" readonly="1"/>
                         <field name="email" readonly="1"/>
+                        <field name="account"/>
                     </group>
                     <notebook>
                         <page string="Bill Details">
@@ -29,7 +31,7 @@
                                     <field name="quantity"/>
                                     <field name="unit_price"/>
                                     <field name="discount"/>
-                                    <field name="total"/>
+                                    <field name="total" readonly="1"/>
                                     <field name="tax_amount" invisible="1"/>
                                 </tree>
                             </field>

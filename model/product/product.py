@@ -29,17 +29,17 @@ class Product(models.Model):
                                 string='Product')
     hsn_code = fields.Char(string='HSN Code')
     code = fields.Char(string='Product Code')
-    stock_id = fields.One2many(comodel_name='stock.stock',
-                               inverse_name='product_id',
-                               string='Stock')
+    stock_ids = fields.One2many(comodel_name='stock.stock',
+                                inverse_name='product_id',
+                                string='Stock')
     comments = fields.Text(string='Comments')
 
-    sale_price = fields.One2many(comodel_name='product.sale.price',
-                                 inverse_name='product_id',
-                                 string='Sale Price')
-    purchase_price = fields.One2many(comodel_name='product.purchase.price',
+    sale_price_ids = fields.One2many(comodel_name='product.sale.price',
                                      inverse_name='product_id',
-                                     string='Purchase Price')
+                                     string='Sale Price')
+    purchase_price_ids = fields.One2many(comodel_name='product.purchase.price',
+                                         inverse_name='product_id',
+                                         string='Purchase Price')
 
     @api.onchange('classification')
     def onchange_classification(self):

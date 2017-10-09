@@ -6,3 +6,4 @@ from . import medical_information
 from . import personal_information
 from . import partner_information
 from . import period
+from . import location

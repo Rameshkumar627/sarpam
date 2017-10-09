@@ -5,5 +5,7 @@
     <menuitem name="Employee" id="hospital_employee" sequence="10" web_icon="sarpam,static/description/employee.png"/>
     <menuitem name="Hospital" id="hospital_hospital" sequence="20" web_icon="sarpam,static/description/hospital.png"/>
     <menuitem name="Pharmacy" id="hospital_pharmacy" sequence="30" web_icon="sarpam,static/description/pharmacy.png"/>
+    <menuitem name="Accounts" id="hospital_accounts" sequence="40" web_icon="sarpam,static/description/account.png"/>
+    <menuitem name="Product" id="hospital_product" sequence="50" web_icon="sarpam,static/description/product.png"/>
 
 </odoo>

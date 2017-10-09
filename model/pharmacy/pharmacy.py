@@ -25,6 +25,8 @@ class Pharmacy(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('payment_made', 'Payment Made')],
                              default='draft',
                              string='State')
+    account = fields.Selection([('bank', 'Bank'), ('cash', 'Cash')], string='Account')
+    restrict_journal = fields.Boolean(string='Restrict Journal', default=False)
 
     def get_current_user_group(self, groups):
         group_ids = self.env.user.groups_id
@@ -61,12 +63,75 @@ class Pharmacy(models.Model):
         return total, tax_amount
 
     def update_account_journal(self):
+        if self.restrict_journal:
+            raise exceptions.ValidationError('Error! Journal Entries already done')
+
+        journal_data = {}
+        journal = self.env['hospital.account.journal'].sudo()
+
+        journal_data['reference'] = self.name
+        rec = journal.create(journal_data)
+
+        # Ledger For Pharmacy
+
+        # Amount In Pharmacy journal
+        data = {}
+        ledger = self.env['hospital.account.ledger'].search([('name', '=', 'Pharmacy Ledger')])
+        data['ledger_id'] = ledger.id
+        data['journal_id'] = rec.id
+        data['reference'] = self.name
+        data['description'] = 'From Pharmacy'
+        data['credit'] = 0
+        data['debit'] = self.total
+
+        rec.journal_line_ids.create(data)
+        # Amount Split to Tax journal and Cash journal
+        # Tax Journal
+        data = {}
+        ledger = self.env['hospital.account.ledger'].search([('name', '=', 'Tax Ledger')])
+        data['ledger_id'] = ledger.id
+        data['journal_id'] = rec.id
+        data['reference'] = self.name
+        data['description'] = 'To Tax'
+        data['credit'] = self.cgst + self.sgst
+        data['debit'] = 0
+
+        rec.journal_line_ids.create(data)
+        if self.account == 'cash':
+            # Cash Journal
+            data = {}
+            ledger = self.env['hospital.account.ledger'].search([('name', '=', 'Cash Ledger')])
+            data['ledger_id'] = ledger.id
+            data['journal_id'] = rec.id
+            data['reference'] = self.name
+            data['description'] = 'To Cash'
+            data['credit'] = self.total
+            data['debit'] = 0
+
+            rec.journal_line_ids.create(data)
+
+        if self.account == 'bank':
+            # Bank Journal
+            data = {}
+            ledger = self.env['hospital.account.ledger'].search([('name', '=', 'Bank Ledger')])
+            data['ledger_id'] = ledger.id
+            data['journal_id'] = rec.id
+            data['reference'] = self.name
+            data['description'] = 'To Bank'
+            data['credit'] = self.total
+            data['debit'] = 0
+
+        rec.journal_line_ids.create(data)
+        self.write({'restrict_journal': True})
+
+    def stock_updation(self):
         pass
 
     @api.multi
     def payment_made_button(self):
         data = {}
         self.check_rights()
+        self.stock_updation()
         sequence = self.get_sequence()
         total, tax_amount = self.update_total()
         discount = total * float(self.discount / 100)
@@ -87,6 +152,7 @@ class Pharmacy(models.Model):
         self.write(data)
 
         self.update_account_journal()
+
 
 Pharmacy()
 

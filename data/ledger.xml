@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequences for hospital.account.ledger -->
+        <record id="sales_ledger_record" model="hospital.account.ledger">
+            <field name="name">Pharmacy Ledger</field>
+            <field name="comment"/>
+        </record>
+
+        <record id="tax_ledger_record" model="hospital.account.ledger">
+            <field name="name">Tax Ledger</field>
+            <field name="comment"/>
+        </record>
+
+        <record id="cash_ledger_record" model="hospital.account.ledger">
+            <field name="name">Cash Ledger</field>
+            <field name="comment"/>
+        </record>
+
+        <record id="bank_ledger_record" model="hospital.account.ledger">
+            <field name="name">Bank Ledger</field>
+            <field name="comment"/>
+        </record>
+
+    </data>
+</odoo>

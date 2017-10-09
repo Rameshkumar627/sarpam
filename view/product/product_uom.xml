@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_product_uom_form">
+        <field name="name">product.uom.form</field>
+        <field name="model">product.uom</field>
+        <field name="arch" type="xml">
+            <form string="Product UOM">
+                <group>
+                    <field name="name" style="width: 50%%"/>
+                    <field name="full_name" style="width: 50%%"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_product_uom_tree">
+    <field name="name">product.uom.tree</field>
+    <field name="model">product.uom</field>
+    <field name="arch" type="xml">
+        <tree string="Product UOM" editable="top">
+            <field name="name"/>
+            <field name="full_name"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_product_uom">
+        <field name="name">Product UOM</field>
+        <field name="res_model">product.uom</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Product UOM"
+              id="menu_product_uom"
+              action="action_product_uom"
+              parent="hospital_product"
+              sequence="30"/>
+
+</odoo>

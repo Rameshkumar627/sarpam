@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_hospital_account_journal_form">
+        <field name="name">hospital.account.journal.form</field>
+        <field name="model">hospital.account.journal</field>
+        <field name="arch" type="xml">
+            <form string="Journal Entries">
+                <sheet>
+                    <separator string="Journal" style="text-align:center;"/>
+                    <h2><field name="name" readonly="1"/></h2>
+                    <group col="4">
+                        <field name="reference"/>
+                        <field name="date"/>
+                    </group>
+                    <notebook>
+                        <page string="Journal Details">
+                            <field name="journal_line_ids" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="ledger_id"/>
+                                    <field name="journal_id" invisible="1"/>
+                                    <field name="reference"/>
+                                    <field name="description"/>
+                                    <field name="credit"/>
+                                    <field name="debit"/>
+                                </tree>
+                            </field>
+                        <field name="comment" placeholder="Comment"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_hospital_account_journal_tree">
+    <field name="name">hospital.account.journal.tree</field>
+    <field name="model">hospital.account.journal</field>
+    <field name="arch" type="xml">
+        <tree string="Journal Entries">
+            <field name="name"/>
+            <field name="reference"/>
+            <field name="date"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_hospital_account_journal">
+        <field name="name">Journal Entries</field>
+        <field name="res_model">hospital.account.journal</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Journal Entries"
+              id="menu_hospital_account_journal"
+              action="action_hospital_account_journal"
+              parent="hospital_accounts"
+              sequence="10"/>
+
+</odoo>

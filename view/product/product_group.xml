@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_product_groups_form">
+        <field name="name">product.groups.form</field>
+        <field name="model">product.groups</field>
+        <field name="arch" type="xml">
+            <form string="Product Groups">
+                <group>
+                    <field name="name" style="width: 50%%"/>
+                    <field name="code" style="width: 50%%"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_product_groups_tree">
+    <field name="name">product.groups.tree</field>
+    <field name="model">product.groups</field>
+    <field name="arch" type="xml">
+        <tree string="Product Groups" editable="top">
+            <field name="name"/>
+            <field name="code"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_product_groups">
+        <field name="name">Product Groups</field>
+        <field name="res_model">product.groups</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Product Groups"
+              id="menu_product_groups"
+              action="action_product_groups"
+              parent="hospital_product"
+              sequence="10"/>
+
+</odoo>
