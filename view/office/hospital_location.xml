@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_hospital_location_form">
+        <field name="name">hospital.location.form</field>
+        <field name="model">hospital.location</field>
+        <field name="arch" type="xml">
+            <form string="Hospital Location">
+                <group>
+                    <field name="name" style="width: 50%%"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_hospital_location_tree">
+    <field name="name">hospital.location.tree</field>
+    <field name="model">hospital.location</field>
+    <field name="arch" type="xml">
+        <tree string="Hospital Location">
+            <field name="name"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_hospital_location">
+        <field name="name">Hospital Location</field>
+        <field name="res_model">hospital.location</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Hospital Location"
+              id="menu_hospital_location"
+              action="action_hospital_location"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>

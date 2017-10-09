@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_human_contact_form">
+        <field name="name">human.contact.form</field>
+        <field name="model">human.contact</field>
+        <field name="arch" type="xml">
+            <form string="Contact">
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="country"/>
+                        <field name="email"/>
+                        <field name="address"/>
+                        <field name="state"/>
+                        <field name="country"/>
+                        <field name="pincode"/>
+                    </group>
+                    <field name="comment" placeholder="comment"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_human_contact_tree">
+    <field name="name">human.contact.tree</field>
+    <field name="model">human.contact</field>
+    <field name="arch" type="xml">
+        <tree string="Contact" editable="top">
+            <field name="name"/>
+            <field name="country"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_human_contact">
+        <field name="name">Contact</field>
+        <field name="res_model">human.contact</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Contact"
+              id="menu_human_contact"
+              action="action_human_contact"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>

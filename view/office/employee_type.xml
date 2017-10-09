@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_employee_type_form">
+        <field name="name">employee.type.form</field>
+        <field name="model">employee.type</field>
+        <field name="arch" type="xml">
+            <form string="Employee Type">
+                <group>
+                    <field name="name" style="width: 50%%"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_type_tree">
+    <field name="name">employee.type.tree</field>
+    <field name="model">employee.type</field>
+    <field name="arch" type="xml">
+        <tree string="Employee Type" editable="top">
+            <field name="name"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_type">
+        <field name="name">Employee Type</field>
+        <field name="res_model">employee.type</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Employee Type"
+              id="menu_employee_type"
+              action="action_employee_type"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>

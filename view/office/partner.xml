@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_hospital_partner_form">
+        <field name="name">hospital.partner.form</field>
+        <field name="model">hospital.partner</field>
+        <field name="arch" type="xml">
+            <form string="Customer/Vendor">
+                <sheet>
+                    <group>
+                        <field name="name" style="width: 50%%"/>
+                        <field name="partner_ref" style="width: 50%%"/>
+                        <field name="phone" style="width: 50%%"/>
+                        <field name="email" style="width: 50%%"/>
+                        <field name="bank_name" style="width: 50%%"/>
+                        <field name="account_no" style="width: 50%%"/>
+                        <field name="pan" style="width: 50%%"/>
+                        <field name="aadhar_card" style="width: 50%%"/>
+                        <field name="office_address" style="width: 50%%"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_hospital_partner_tree">
+    <field name="name">hospital.partner.tree</field>
+    <field name="model">hospital.partner</field>
+    <field name="arch" type="xml">
+        <tree string="Customer/Vendor" editable="top">
+            <field name="name"/>
+            <field name="phone"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_hospital_partner">
+        <field name="name">Customer/Vendor</field>
+        <field name="res_model">hospital.partner</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Customer/Vendor"
+              id="menu_hospital_partner"
+              action="action_hospital_partner"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>

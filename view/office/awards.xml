@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_employee_awards_form">
+        <field name="name">employee.awards.form</field>
+        <field name="model">employee.awards</field>
+        <field name="arch" type="xml">
+            <form string="Awards">
+                <sheet>
+                    <group>
+                        <field name="name" style="width: 50%%"/>
+                        <field name="hospital_employee_id" style="width: 50%%"/>
+                        <field name="attachment" style="width: 50%%"/>
+                    </group>
+                <field name="comment" placeholder="Comment"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_awards_tree">
+    <field name="name">employee.awards.tree</field>
+    <field name="model">employee.awards</field>
+    <field name="arch" type="xml">
+        <tree string="Awards" editable="top">
+            <field name="name"/>
+            <field name="hospital_employee_id"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_awards">
+        <field name="name">Awards</field>
+        <field name="res_model">employee.awards</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Awards"
+              id="menu_employee_awards"
+              action="action_employee_awards"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>

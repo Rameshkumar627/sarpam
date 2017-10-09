@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_account_bank_form">
+        <field name="name">account.bank.form</field>
+        <field name="model">account.bank</field>
+        <field name="arch" type="xml">
+            <form string="Bank">
+                <group>
+                    <field name="name" style="width: 50%%"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_account_bank_tree">
+    <field name="name">account.bank.tree</field>
+    <field name="model">account.bank</field>
+    <field name="arch" type="xml">
+        <tree string="Bank" editable="top">
+            <field name="name"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_account_bank">
+        <field name="name">Bank</field>
+        <field name="res_model">account.bank</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Bank"
+              id="menu_account_bank"
+              action="action_account_bank"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>

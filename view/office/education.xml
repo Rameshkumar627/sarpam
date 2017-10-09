@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_employee_education_form">
+        <field name="name">employee.education.form</field>
+        <field name="model">employee.education</field>
+        <field name="arch" type="xml">
+            <form string="Education">
+                <sheet>
+                    <group>
+                        <field name="name" style="width: 50%%"/>
+                        <field name="hospital_employee_id" style="width: 50%%"/>
+                        <field name="duration" style="width: 50%%"/>
+                        <field name="percentage" style="width: 50%%"/>
+                        <field name="academy" style="width: 50%%"/>
+                        <field name="status" style="width: 50%%"/>
+                    </group>
+                    <field name="comment" placeholder="Comment"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_education_tree">
+    <field name="name">employee.education.tree</field>
+    <field name="model">employee.education</field>
+    <field name="arch" type="xml">
+        <tree string="Education">
+            <field name="name"/>
+            <field name="hospital_employee_id"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_education">
+        <field name="name">Education</field>
+        <field name="res_model">employee.education</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Education"
+              id="menu_employee_education"
+              action="action_employee_education"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>

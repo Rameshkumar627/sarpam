@@ -81,7 +81,7 @@
     <menuitem name="Pharmacy"
               id="menu_hospital_pharmacy"
               action="action_hospital_pharmacy"
-              parent="hospital_hospital"
+              parent="hospital_pharmacy"
               sequence="20"/>
 
 </odoo>

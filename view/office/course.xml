@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_human_course_form">
+        <field name="name">human.course.form</field>
+        <field name="model">human.course</field>
+        <field name="arch" type="xml">
+            <form string="Course">
+                <group>
+                    <field name="name" style="width: 50%%"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_human_course_tree">
+    <field name="name">human.course.tree</field>
+    <field name="model">human.course</field>
+    <field name="arch" type="xml">
+        <tree string="Course" editable="top">
+            <field name="name"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_human_course">
+        <field name="name">Course</field>
+        <field name="res_model">human.course</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Course"
+              id="menu_human_course"
+              action="action_human_course"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>
