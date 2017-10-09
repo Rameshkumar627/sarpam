@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_hospital_assert_form">
+        <field name="name">hospital.assert.form</field>
+        <field name="model">hospital.assert</field>
+        <field name="arch" type="xml">
+            <form string="Assert Management">
+                <sheet>
+                    <separator string="Assert Management" style="text-align:center;"/>
+                    <h2><field name="name" readonly="1"/></h2>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check">
+                            <field name="working" widget="boolean_button" options="{&quot;terminology&quot;: &quot;working&quot;}"/>
+                        </button>
+                    </div>
+                    <group col="4">
+                        <field name="product_id"/>
+                        <field name="code"/>
+                        <field name="responsible_id"/>
+                        <field name="accessories_ids" widget="many2many_tags"/>
+                        <field name="location"/>
+                    </group>
+                    <field name="assert_id" invisible="1"/>
+                    <notebook>
+                        <page string="Service Information">
+                            <group col="4">
+                                <field name="service_id"/>
+                                <field name="service_contact"/>
+                            </group>
+                            <field name="service_ids">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                    <field name="documents"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Product Information">
+                            <group col="4">
+                                <field name="purchase_id"/>
+                                <field name="purchase_date"/>
+                                <field name="purchase_contact"/>
+                                <field name="manufacturer"/>
+                                <field name="model_no"/>
+                                <field name="dimension"/>
+                                <field name="serial_no"/>
+                                <field name="warranty"/>
+                                <field name="operating_manual"/>
+                                <field name="documents"/>
+                            </group>
+                        </page>
+                        <page string="Notification Information">
+                            <field name="notification_ids">
+                                <tree editable="bottom">
+                                    <field name="date"/>
+                                    <field name="subject"/>
+                                    <field name="description"/>
+                                    <field name="email_to"/>
+                                    <field name="email_cc"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <field name="comment" placeholder="Comment"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_hospital_assert_tree">
+    <field name="name">hospital.assert.tree</field>
+    <field name="model">hospital.assert</field>
+    <field name="arch" type="xml">
+        <tree string="Assert Management">
+            <field name="product_id"/>
+            <field name="code"/>
+            <field name="responsible_id"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_hospital_assert">
+        <field name="name">Assert Management</field>
+        <field name="res_model">hospital.assert</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Assert Management"
+              id="menu_hospital_assert"
+              action="action_hospital_assert"
+              parent="hospital_hospital"
+              sequence="20"/>
+
+</odoo>

@@ -15,9 +15,10 @@ class Voucher(models.Model):
     voucher_line_ids = fields.One2many(comodel_name='hospital.voucher.line',
                                        inverse_name='voucher_id',
                                        string='Voucher Lines')
-    state = fields.Selection([('draft', 'Draft'), ('confirmed', 'confirmed')],
+    state = fields.Selection([('draft', 'Draft'), ('paid', 'Paid')],
                              default='draft',
                              string='State')
+    comment = fields.Text(string='Comment')
 
     def get_current_user_group(self, groups):
         group_ids = self.env.user.groups_id
@@ -28,10 +29,13 @@ class Voucher(models.Model):
         return status
 
     def check_rights(self):
+        rights = True
         for rec in self:
             if rec.state == 'draft':
-                rec.grant_access_group = rec.get_current_user_group(['Hospital - Administrator',
-                                                                     'Hospital - Accounts'])
+                rights = rec.get_current_user_group(['Hospital - Administrator', 'Hospital - Accounts'])
+
+            if rights:
+                raise exceptions.ValidationError('Error! You are not access to perform this action')
 
     def get_sequence(self):
         obj = self.env['ir.sequence'].sudo()
@@ -55,18 +59,19 @@ class Voucher(models.Model):
         pass
 
     @api.multi
-    def confirm_button(self):
+    def pay_button(self):
         data = {}
         self.check_rights()
         sequence = self.get_sequence()
         total = self.update_total()
 
         data['total'] = total
-        data['state'] = 'confirmed'
+        data['state'] = 'paid'
         data['name'] = sequence
         self.write(data)
 
         self.update_account_journal()
+
 
 Voucher()
 
@@ -74,8 +79,7 @@ Voucher()
 class VoucherLine(models.Model):
     _name = 'hospital.voucher.line'
 
-    name = fields.Char(string='Name', required=True)
-    description = fields.Text(string='Description')
+    name = fields.Char(string='Description', required=True)
     amount = fields.Float(string='Amount', required=True)
     voucher_id = fields.Many2one(comodel_name='hospital.voucher', string='Voucher')
 

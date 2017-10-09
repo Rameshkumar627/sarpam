@@ -13,7 +13,7 @@ class Employee(models.Model):
     position = fields.Char(string='Job Position')
     name = fields.Char(string='Employee Name', required=True)
     employee_uid = fields.Char(string='Employee ID')
-    employee_type = fields.Many2one(comodel_name='employee.type', string='Employee Type', required=True)
+    employee_type_id = fields.Many2one(comodel_name='employee.type', string='Employee Type', required=True)
     date_of_join = fields.Date(string='Date Of Joining')
     date_of_exit = fields.Date(string='Date Of Exit')
     phone_primary = fields.Char(string='Phone Primary')
@@ -23,10 +23,10 @@ class Employee(models.Model):
     aadhar_card = fields.Char(string='Aadhar Card')
     bank_name = fields.Many2one(comodel_name='account.bank', string='Bank')
     account_no = fields.Char(string='Bank Account No')
-    direct_reportee = fields.Many2one(comodel_name='hospital.employee', string='Direct Reportee', index=True)
-    subordinates = fields.One2many(comodel_name='hospital.employee',
-                                   inverse_name='direct_reportee',
-                                   string='Subordinates')
+    direct_reportee_id = fields.Many2one(comodel_name='hospital.employee', string='Direct Reportee', index=True)
+    subordinate_ids = fields.One2many(comodel_name='hospital.employee',
+                                      inverse_name='direct_reportee_id',
+                                      string='Subordinates')
     active = fields.Boolean(string='Acive', default=True)
 
     # Medical Information
@@ -46,7 +46,8 @@ class Employee(models.Model):
                                        ('divorced', 'Divorced')],
                                       string='Marital Status')
 
-    contact_address = fields.One2many(comodel_name='human.contact', inverse_name='hospital_employee_id',
+    contact_address = fields.One2many(comodel_name='human.contact',
+                                      inverse_name='hospital_employee_id',
                                       string='Contact Address')
     emergency_contact = fields.Many2one(comodel_name='human.contact', string='Emergency Contact')
     comments = fields.Text(string='Comments')
@@ -70,9 +71,9 @@ class Employee(models.Model):
                               string='Status')
 
     # HR Information
-    permission_approvar = fields.Many2one(comodel_name='hospital.employee', string='Permission Approvar')
-    leave_approvar = fields.Many2one(comodel_name='hospital.employee', string='Leave Approvar')
-    overtime_approvar = fields.Many2one(comodel_name='hospital.employee', string='Overtime Approvar')
+    permission_approvar_id = fields.Many2one(comodel_name='hospital.employee', string='Permission Approvar')
+    leave_approvar_id = fields.Many2one(comodel_name='hospital.employee', string='Leave Approvar')
+    overtime_approvar_id = fields.Many2one(comodel_name='hospital.employee', string='Overtime Approvar')
 
 
 Employee()

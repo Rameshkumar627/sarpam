@@ -29,7 +29,9 @@ class Product(models.Model):
                                 string='Product')
     hsn_code = fields.Char(string='HSN Code')
     code = fields.Char(string='Product Code')
-    store_quantity = fields.Float(string='Available Qty')
+    stock_id = fields.One2many(comodel_name='stock.stock',
+                               inverse_name='product_id',
+                               string='Stock')
     comments = fields.Text(string='Comments')
 
     sale_price = fields.One2many(comodel_name='product.sale.price',
@@ -79,7 +81,6 @@ class Product(models.Model):
 
     @api.model
     def create(self, vals):
-        print vals
         code = self.create_sequence(vals['product_group'], vals['product_sub_group'])
         vals['code'] = code
         rec = super(Product, self).create(vals)

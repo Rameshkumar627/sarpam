@@ -10,8 +10,13 @@
     'depends': ['base', 'board', 'mail'],
     'data': [
         'data/employee.xml',
+        'data/office.xml',
+        'data/product.xml',
         'menu/menu.xml',
         'view/employee/hospital_employee.xml',
+        'view/hospital/voucher.xml',
+        'view/hospital/material_management.xml',
+        'view/pharmacy/pharmacy.xml',
     ],
     'demo': [
 

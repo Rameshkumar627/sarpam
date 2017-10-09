@@ -10,12 +10,14 @@ class Pharmacy(models.Model):
     name = fields.Char(string='Sequence', readonly=True)
     date = fields.Date(string='Date', required=True)
     customer_id = fields.Many2one(comodel_name='hospital.partner', string='Customer', required=True)
-    address = fields.Text(string='Address', related='customer_id.address')
     phone = fields.Char(string='Phone', related='customer_id.phone')
     email = fields.Char(string='Email', related='customer_id.email')
     total = fields.Float(string='Total', readonly=True)
     cgst = fields.Float(string='CGST', readonly=True)
     sgst = fields.Float(string='SGST', readonly=True)
+    round_off = fields.Float(string='Round Off', readonly=True)
+    discount = fields.Float(string='Discount', readonly=True)
+    packing_forwading = fields.Float(string='Packaging & Forwading')
     comment = fields.Text(string='Comment')
     pharmacy_line_ids = fields.One2many(comodel_name='hospital.pharmacy.line',
                                         inverse_name='pharmacy_id',
@@ -67,12 +69,21 @@ class Pharmacy(models.Model):
         self.check_rights()
         sequence = self.get_sequence()
         total, tax_amount = self.update_total()
+        discount = total * float(self.discount / 100)
 
-        data['total'] = total
+        discounted_total = total - discount
+        packing_forwading = discounted_total * float(self.packing_forwading / 100)
+        total = discounted_total + packing_forwading
+        round_off = total - round(total)
+
         data['cgst'] = tax_amount / 2
         data['sgst'] = tax_amount / 2
         data['state'] = 'payment_made'
         data['name'] = sequence
+        data['round_off'] = round_off
+        data['total'] = total - round_off
+        data['packing_forwading'] = packing_forwading
+        data['discount'] = discount
         self.write(data)
 
         self.update_account_journal()
