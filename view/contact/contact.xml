@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Patient Contact-->
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_patient_contact_tree">
+    <field name="name">hospital.patient.tree</field>
+    <field name="model">hospital.patient</field>
+    <field name="arch" type="xml">
+        <tree string="Patient">
+            <field name="name"/>
+            <field name="patient_uid"/>
+            <field name="phone"/>
+            <field name="email"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_patient_contact">
+        <field name="name">Patient</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_patient_contact_tree"/>
+    </record>
+
+    <menuitem name="Patient"
+              id="menu_patient_contact"
+              action="action_patient_contact"
+              parent="hospital_contact"
+              sequence="10"/>
+
+    <!--Doctor Contact-->
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_doctor_contact_tree">
+    <field name="name">hospital.employee.tree</field>
+    <field name="model">hospital.employee</field>
+    <field name="arch" type="xml">
+        <tree string="Doctor">
+            <field name="name"/>
+            <field name="employee_uid"/>
+            <field name="phone_primary"/>
+            <field name="phone_secondary"/>
+            <field name="email"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_doctor_contact">
+        <field name="name">Doctor</field>
+        <field name="res_model">hospital.employee</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_doctor','=',True)]</field>
+        <field name="view_id" ref="view_doctor_contact_tree"/>
+    </record>
+
+    <menuitem name="Doctor"
+              id="menu_doctor_contact"
+              action="action_doctor_contact"
+              parent="hospital_contact"
+              sequence="20"/>
+
+    <!--Staff Contact-->
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_staff_contact_tree">
+    <field name="name">hospital.employee.tree</field>
+    <field name="model">hospital.employee</field>
+    <field name="arch" type="xml">
+        <tree string="Staff">
+            <field name="name"/>
+            <field name="employee_uid"/>
+            <field name="phone_primary"/>
+            <field name="phone_secondary"/>
+            <field name="email"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_staff_contact">
+        <field name="name">Staff</field>
+        <field name="res_model">hospital.employee</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_doctor','=',False)]</field>
+        <field name="view_id" ref="view_staff_contact_tree"/>
+    </record>
+
+    <menuitem name="Staff"
+              id="menu_staff_contact"
+              action="action_staff_contact"
+              parent="hospital_contact"
+              sequence="30"/>
+
+    <!--Vendor Contact-->
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_vendor_contact_tree">
+    <field name="name">hospital.partner.tree</field>
+    <field name="model">hospital.partner</field>
+    <field name="arch" type="xml">
+        <tree string="Vendor">
+            <field name="name"/>
+            <field name="partner_ref"/>
+            <field name="phone"/>
+            <field name="email"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_vendor_contact">
+        <field name="name">Vendor</field>
+        <field name="res_model">hospital.partner</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_vendor_contact_tree"/>
+    </record>
+
+    <menuitem name="Vendor"
+              id="menu_vendor_contact"
+              action="action_vendor_contact"
+              parent="hospital_contact"
+              sequence="40"/>
+
+
+</odoo>

@@ -16,6 +16,7 @@ class Contact(models.Model):
     pincode = fields.Char(string='Pincode')
     comment = fields.Char(string='Comment')
     hospital_employee_id = fields.Many2one(comodel_name='hospital.employee', string='Employee')
+    hospital_patient_id = fields.Many2one(comodel_name='hospital.patient', string='Patient')
 
 
 Contact()

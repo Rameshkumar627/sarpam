@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_out_patient_form">
+        <field name="name">out.patient.form</field>
+        <field name="model">out.patient</field>
+        <field name="arch" type="xml">
+            <form string="Out Patient">
+                <sheet>
+                    <separator string="Out Patient" style="text-align:center;"/>
+                    <h2><field name="sequence" readonly="1"/></h2>
+                    <group col="4">
+                        <field name="patient_id"/>
+                        <field name="patient_uid"/>
+                        <field name="age"/>
+                        <field name="appointment_id"/>
+                        <field name="symptom_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Diagnosis">
+                            <field name="diagnosis_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="comment"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Treatment">
+                            <separator string="Treatment" style="text-align:center;"/>
+                            <group>
+                                <field name="treatment"/>
+                                <field name="next_appointment"/>
+                                <field name="medicine"/>
+                                <field name="scan"/>
+                                <field name="test"/>
+                            </group>
+                            <field name="medicine_suggestion_ids" attrs="{'invisible': [('medicine', '=', False)]}">
+                                <tree editable="bottom">
+                                    <field name="select"/>
+                                    <field name="medicine_id"/>
+                                </tree>
+                            </field>
+                            <field name="scan_suggestion_ids" attrs="{'invisible': [('scan', '=', False)]}">
+                                <tree editable="bottom">
+                                    <field name="select"/>
+                                    <field name="scan_id"/>
+                                </tree>
+                            </field>
+                            <field name="test_suggestion_ids" attrs="{'invisible': [('test', '=', False)]}">
+                                <tree editable="bottom">
+                                    <field name="select"/>
+                                    <field name="test_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Report">
+                        </page>
+                    </notebook>
+                    <field name="comment" placeholder="Comment"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_out_patient_tree">
+    <field name="name">out.patient.tree</field>
+    <field name="model">out.patient</field>
+    <field name="arch" type="xml">
+        <tree string="Out Patient">
+            <field name="patient_id"/>
+            <field name="patient_uid"/>
+            <field name="age"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_out_patient">
+        <field name="name">Out Patient</field>
+        <field name="res_model">out.patient</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Out Patient"
+              id="menu_out_patient"
+              action="action_out_patient"
+              parent="hospital_patient"
+              sequence="10"/>
+
+</odoo>

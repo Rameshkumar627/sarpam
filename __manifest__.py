@@ -33,11 +33,16 @@
         'view/office/partner.xml',
         'view/office/state.xml',
         'view/office/stock_location.xml',
+        'view/patient/patient.xml',
+        'view/patient/appointment.xml',
+        'view/patient/out_patient.xml',
         'view/hospital/voucher.xml',
         'view/hospital/material_management.xml',
         'view/pharmacy/pharmacy.xml',
         'view/accounts/account_journal.xml',
         'view/accounts/account_ledger.xml',
+        'view/contact/contact.xml',
+        'view/employee/organisational_chart.xml',
     ],
     'demo': [
 

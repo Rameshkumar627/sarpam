@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+            id="report_organisational_chart"
+            string="Leaves Summary"
+            model="make.chart"
+            report_type="qweb-html"
+            name="sarpam.organisational_chart"
+            file="sarpam.organisational_chart"
+            menu="False"/>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_make_chart_form">
+        <field name="name">make.chart.form</field>
+        <field name="model">make.chart</field>
+        <field name="arch" type="xml">
+            <form string="Awards">
+                <sheet>
+                    <button name="print_report" string="ramesh" type="object"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_hospital_employee_1">
+        <field name="name">Employee_1</field>
+        <field name="res_model">make.chart</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem name="Employee_1"
+              id="menu_hospital_employee"
+              action="action_hospital_employee_1"
+              parent="hospital_employee"
+              sequence="10"/>
+
+</odoo>

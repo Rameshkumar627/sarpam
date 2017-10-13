@@ -12,6 +12,7 @@ class Employee(models.Model):
     image = fields.Binary(string='Image')
     position = fields.Char(string='Job Position')
     name = fields.Char(string='Employee Name', required=True)
+    is_doctor = fields.Boolean(string='Is Doctor')
     employee_uid = fields.Char(string='Employee ID')
     employee_type_id = fields.Many2one(comodel_name='employee.type', string='Employee Type', required=True)
     date_of_join = fields.Date(string='Date Of Joining')

@@ -7,3 +7,4 @@ from . import hospital
 from . import product
 from . import pharmacy
 from . import accounts
+from . import patient
