@@ -11,133 +11,146 @@ class OrganisationalChart(models.AbstractModel):
     def render_html(self, docids, data=None):
         print "ramesh"
         data = '''
-Result Size: 913 x 834
-<!DOCTYPE html>
-
+<!doctype html>
 <html>
 
 <head>
-
-<style>
-
-table {
-
-    font-family: arial, sans-serif;
-
-    border-collapse: collapse;
-
-    width: 100%;
-
-}
-
-​
-
-td, th {
-
-    border: 1px solid #dddddd;
-
-    text-align: left;
-
-    padding: 8px;
-
-}
-
-​
-
-tr:nth-child(even) {
-
-    background-color: #dddddd;
-
-}
-
-</style>
-
+    <title>Bar Chart</title>
+    <script src="http://0.0.0.0:8069/sarpam/static/Chart.bundle.js"></script>
+    <script src="http://0.0.0.0:8069/sarpam/static/utils.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
 </head>
 
 <body>
+    <div id="container" style="width: 75%;">
+        <canvas id="canvas"></canvas>
+    </div>
+    
+    <script>
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var color = Chart.helpers.color;
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }, {
+                label: 'Dataset 2',
+                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }]
 
-​
+        };
 
-<table>
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Bar Chart'
+                    }
+                }
+            });
 
-  <tr>
+        };
 
-    <th>Company</th>
+        document.getElementById('randomizeData').addEventListener('click', function() {
+            var zero = Math.random() < 0.2 ? true : false;
+            barChartData.datasets.forEach(function(dataset) {
+                dataset.data = dataset.data.map(function() {
+                    return zero ? 0.0 : randomScalingFactor();
+                });
 
-    <th>Contact</th>
+            });
+            window.myBar.update();
+        });
 
-    <th>Country</th>
+        var colorNames = Object.keys(window.chartColors);
+        document.getElementById('addDataset').addEventListener('click', function() {
+            var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
+            var dsColor = window.chartColors[colorName];
+            var newDataset = {
+                label: 'Dataset ' + barChartData.datasets.length,
+                backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+                borderColor: dsColor,
+                borderWidth: 1,
+                data: []
+            };
 
-  </tr>
+            for (var index = 0; index < barChartData.labels.length; ++index) {
+                newDataset.data.push(randomScalingFactor());
+            }
 
-  <tr>
+            barChartData.datasets.push(newDataset);
+            window.myBar.update();
+        });
 
-    <td>Alfreds Futterkiste</td>
+        document.getElementById('addData').addEventListener('click', function() {
+            if (barChartData.datasets.length > 0) {
+                var month = MONTHS[barChartData.labels.length % MONTHS.length];
+                barChartData.labels.push(month);
 
-    <td>Maria Anders</td>
+                for (var index = 0; index < barChartData.datasets.length; ++index) {
+                    //window.myBar.addData(randomScalingFactor(), index);
+                    barChartData.datasets[index].data.push(randomScalingFactor());
+                }
 
-    <td>Germany</td>
+                window.myBar.update();
+            }
+        });
 
-  </tr>
+        document.getElementById('removeDataset').addEventListener('click', function() {
+            barChartData.datasets.splice(0, 1);
+            window.myBar.update();
+        });
 
-  <tr>
+        document.getElementById('removeData').addEventListener('click', function() {
+            barChartData.labels.splice(-1, 1); // remove the label first
 
-    <td>Centro comercial Moctezuma</td>
+            barChartData.datasets.forEach(function(dataset, datasetIndex) {
+                dataset.data.pop();
+            });
 
-    <td>Francisco Chang</td>
-
-    <td>Mexico</td>
-
-  </tr>
-
-  <tr>
-
-    <td>Ernst Handel</td>
-
-    <td>Roland Mendel</td>
-
-    <td>Austria</td>
-
-  </tr>
-
-  <tr>
-
-    <td>Island Trading</td>
-
-    <td>Helen Bennett</td>
-
-    <td>UK</td>
-
-  </tr>
-
-  <tr>
-
-    <td>Laughing Bacchus Winecellars</td>
-
-    <td>Yoshi Tannamuri</td>
-
-    <td>Canada</td>
-
-  </tr>
-
-  <tr>
-
-    <td>Magazzini Alimentari Riuniti</td>
-
-    <td>Giovanni Rovelli</td>
-
-    <td>Italy</td>
-
-  </tr>
-
-</table>
-
-​
-
+            window.myBar.update();
+        });
+    </script>
 </body>
 
 </html>
-
 ​
 
 '''

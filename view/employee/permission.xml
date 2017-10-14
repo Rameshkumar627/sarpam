@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_employee_permission_form">
+        <field name="name">employee.permission.form</field>
+        <field name="model">employee.permission</field>
+        <field name="arch" type="xml">
+            <form string="Permission">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="confirm_button" string="Confirm" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="approve_button" string="Approve" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['confirm'])]}"/>
+                    <button name="cancel_button" string="Cancel" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['cancel'])]}"/>
+                </header>
+                <sheet>
+                    <separator string="Permission" style="text-align:center;"/>
+                    <group col="4">
+                        <field name="date" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        <field name="employee_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        <field name="hours" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        <field name="approved_by" readonly="1"/>
+                        <field name="approved_on" readonly="1"/>
+                    </group>
+                <field name="comment" placeholder="Comment" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_permission_tree">
+    <field name="name">employee.permission.tree</field>
+    <field name="model">employee.permission</field>
+    <field name="arch" type="xml">
+        <tree string="Permission">
+            <field name="date"/>
+            <field name="employee_id"/>
+            <field name="hours"/>
+            <field name="approved_by"/>
+            <field name="approved_on"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_permission">
+        <field name="name">Permission</field>
+        <field name="res_model">employee.permission</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Permission"
+              id="menu_employee_permission"
+              action="action_employee_permission"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+</odoo>

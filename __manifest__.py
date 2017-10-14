@@ -43,6 +43,9 @@
         'view/accounts/account_ledger.xml',
         'view/contact/contact.xml',
         'view/employee/organisational_chart.xml',
+        'view/employee/leave_application.xml',
+        'view/employee/permission.xml',
+        'view/employee/overtime.xml',
     ],
     'demo': [
 

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_employee_leave_application_form">
+        <field name="name">employee.leave.application.form</field>
+        <field name="model">employee.leave.application</field>
+        <field name="arch" type="xml">
+            <form string="Leave Application">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="confirm_button" string="Confirm" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="approve_button" string="Approve" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['confirm'])]}"/>
+                    <button name="cancel_button" string="Cancel" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['cancel'])]}"/>
+                </header>
+                <sheet>
+                    <separator string="Leave Application" style="text-align:center;"/>
+                    <group col="4">
+                        <field name="from_date" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        <field name="till_date" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        <field name="employee_id" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        <field name="type" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                        <field name="approved_by" readonl="1"/>
+                        <field name="approved_on" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="reason" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                    </group>
+                <field name="comment" placeholder="Comment" attrs="{'readonly': [('state', 'not in', ['draft'])]}"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_leave_application_tree">
+    <field name="name">employee.leave.application.tree</field>
+    <field name="model">employee.leave.application</field>
+    <field name="arch" type="xml">
+        <tree string="Leave Application">
+            <field name="from_date"/>
+            <field name="till_date"/>
+            <field name="employee_id"/>
+            <field name="type"/>
+            <field name="approved_by"/>
+            <field name="approved_on"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_leave_application">
+        <field name="name">Leave Application</field>
+        <field name="res_model">employee.leave.application</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Leave Application"
+              id="menu_employee_leave_application"
+              action="action_employee_leave_application"
+              parent="hospital_hospital"
+              sequence="40"/>
+
+    <!--Warning View-->
+    <record model="ir.ui.view" id="view_employee_leave_application_notification_form">
+        <field name="name">employee.leave.application.form</field>
+        <field name="model">employee.leave.application</field>
+        <field name="arch" type="xml">
+            <form string="Notification">
+                <style>
+                    .modal-footer { visibility: hidden; }
+                    .modal-header { visibility: hidden; }
+                </style>
+                <separator string="Notification" style="text-align:center;"/>
+                <field name="app_notification" readonly="1"/>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>
