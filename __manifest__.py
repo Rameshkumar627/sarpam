@@ -46,6 +46,11 @@
         'view/employee/leave_application.xml',
         'view/employee/permission.xml',
         'view/employee/overtime.xml',
+        'view/employee/shift.xml',
+        'view/employee/time_schedule.xml',
+        'view/employee/time_sheet.xml',
+        'view/employee/attendance.xml',
+        'view/employee/employee_timesheet.xml',
     ],
     'demo': [
 

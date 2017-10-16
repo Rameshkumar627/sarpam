@@ -39,7 +39,7 @@
     <menuitem name="Blood Group"
               id="menu_blood_group"
               action="action_blood_group"
-              parent="hospital_hospital"
+              parent="hospital_others"
               sequence="40"/>
 
 </odoo>

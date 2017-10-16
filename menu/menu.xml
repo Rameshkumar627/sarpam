@@ -2,12 +2,31 @@
 <odoo>
 
     <!--Menu-->
+    <!--Employee-->
     <menuitem name="Employee" id="hospital_employee" sequence="10" web_icon="sarpam,static/description/employee.png"/>
+    <menuitem name="Time Management"
+              id="hospital_time_management"
+              parent="hospital_employee"
+              sequence="10"
+              web_icon="sarpam,static/description/employee.png"/>
+    <menuitem name="Leave management"
+              id="hospital_leave_management"
+              parent="hospital_employee"
+              sequence="20"
+              web_icon="sarpam,static/description/employee.png"/>
+    <menuitem name="payroll"
+              id="hospital_payroll"
+              parent="hospital_employee"
+              sequence="30"
+              web_icon="sarpam,static/description/employee.png"/>
+
     <menuitem name="Hospital" id="hospital_hospital" sequence="20" web_icon="sarpam,static/description/hospital.png"/>
     <menuitem name="Pharmacy" id="hospital_pharmacy" sequence="30" web_icon="sarpam,static/description/pharmacy.png"/>
     <menuitem name="Accounts" id="hospital_accounts" sequence="40" web_icon="sarpam,static/description/account.png"/>
     <menuitem name="Product" id="hospital_product" sequence="50" web_icon="sarpam,static/description/product.png"/>
     <menuitem name="Patient" id="hospital_patient" sequence="60" web_icon="sarpam,static/description/patient.png"/>
     <menuitem name="Contact" id="hospital_contact" sequence="70" web_icon="sarpam,static/description/contact.png"/>
+
+    <menuitem name="Others" id="hospital_others" sequence="80" web_icon="sarpam,static/description/contact.png"/>
 
 </odoo>

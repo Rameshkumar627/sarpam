@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_employee_time_schedule_form">
+        <field name="name">employee.time.schedule.form</field>
+        <field name="model">employee.time.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Time Schedule">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="confirm_button" string="Confirm" type="object"/>
+                </header>
+                <sheet>
+                    <h1><field name="sequence" readonly="1"/></h1>
+                    <group>
+                        <group>
+                            <field name="from_date"/>
+                            <field name="shift"/>
+                        </group>
+                        <group>
+                            <field name="till_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Employee">
+                            <field name="schedule_line_ids">
+                                <tree editable="bottom">
+                                    <field name="employee_id"/>
+                                    <field name="schedule_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <field name="comment" placeholder="Comment"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_time_schedule_tree">
+    <field name="name">employee.time.schedule.tree</field>
+    <field name="model">employee.time.schedule</field>
+    <field name="arch" type="xml">
+        <tree string="Time Schedule">
+            <field name="from_date"/>
+            <field name="till_date"/>
+            <field name="shift"/>
+            <field name="state"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_time_schedule">
+        <field name="name">Time Schedule</field>
+        <field name="res_model">employee.time.schedule</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Time Schedule"
+              id="menu_employee_time_schedule"
+              action="action_employee_time_schedule"
+              parent="hospital_hospital"
+              sequence="10"/>
+
+</odoo>

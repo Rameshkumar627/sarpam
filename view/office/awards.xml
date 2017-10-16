@@ -45,7 +45,7 @@
     <menuitem name="Awards"
               id="menu_employee_awards"
               action="action_employee_awards"
-              parent="hospital_hospital"
+              parent="hospital_others"
               sequence="40"/>
 
 </odoo>

@@ -3,5 +3,6 @@
 
 from . import hospital_employee
 from . import organisation_chart
-from . import leave
-from . import permission
+from . import employee_benefit
+from . import time
+from . import payroll

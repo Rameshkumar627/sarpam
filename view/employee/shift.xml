@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_employee_shift_form">
+        <field name="name">employee.shift.form</field>
+        <field name="model">employee.shift</field>
+        <field name="arch" type="xml">
+            <form string="Employee Shift">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="from_time_hours"/>
+                            <field name="from_time_min"/>
+                        </group>
+                        <group>
+                            <field name="till_time_hours"/>
+                            <field name="till_time_min"/>
+                            <button name="calc_till_button" class="oe_highlight" string="Calculate End Time" type="object"/>
+                        </group>
+                            <field name="duration"/>
+                    </group>
+                    <field name="comment" placeholder="Comment"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_shift_tree">
+    <field name="name">employee.shift.tree</field>
+    <field name="model">employee.shift</field>
+    <field name="arch" type="xml">
+        <tree string="Employee Shift">
+            <field name="name"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_shift">
+        <field name="name">Employee Shift</field>
+        <field name="res_model">employee.shift</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Employee Shift"
+              id="menu_employee_shift"
+              action="action_employee_shift"
+              parent="hospital_hospital"
+              sequence="10"/>
+
+</odoo>

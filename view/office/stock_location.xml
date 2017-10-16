@@ -39,7 +39,7 @@
     <menuitem name="Stock Location"
               id="menu_stock_location"
               action="action_stock_location"
-              parent="hospital_hospital"
+              parent="hospital_others"
               sequence="40"/>
 
 </odoo>

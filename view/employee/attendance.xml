@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <report
+        id="report_attendance"
+        string="Attendance Report"
+        model="employee.attendance"
+        report_type="qweb-html"
+        name="shop.reportattendance"
+        file="shop.reportattendance"
+        menu="False"/>
+
+    <template id="reportattendance">
+    <t t-call="report.html_container">
+        <t t-call="report.internal_layout">
+            <div class="page">
+                <h3 class="mb32">Leaves Summary</h3>
+
+                <table class="table table-bordered mb32" style="table-layout:auto">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <t t-foreach="get_month_range" t-as="month">
+                                &lt;th class="text-center"&gt;<t t-esc="month"/>&lt;/th&gt;
+                            </t>
+                            <th>Absent Days</th>
+                            <th>LOP Days</th>
+                            <th>Comp-Off</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </t>
+</template>
+
+</odoo>

@@ -20,6 +20,7 @@ class Permission(models.Model):
     approved_by = fields.Many2one(comodel_name='hospital.employee', string='Approved By', readonly=True)
     approved_on = fields.Date(string='Approved On', readonly=True)
     comment = fields.Text(string='Comment')
+    app_notification = fields.Text(string='Notification')
 
     def get_grant_access_group_status(self):
         for rec in self:
@@ -45,6 +46,19 @@ class Permission(models.Model):
         self.check_rights()
         self.write({'state': 'confirmed'})
 
+        self.app_notification = "Your Permission Application in send for approval"
+        data = {
+            'name': _('Leave Application'),
+            'view_mode': 'form',
+            'view_id': self.env.ref('sarpam.view_employee_leave_application_notification_form').id,
+            'res_model': 'employee.leave.application',
+            'type': 'ir.actions.act_window',
+            'res_id': self.id,
+            'target': 'new'
+        }
+
+        return data
+
     @api.multi
     def approve_button(self):
         self.check_rights()
@@ -52,6 +66,19 @@ class Permission(models.Model):
                 'approved_on': datetime.now().strftime("%Y-%m-%d"),
                 'approved_by': self.env.user.id}
         self.write(data)
+
+        self.app_notification = "{0} Permission application is approved".format(self.employee_id.name)
+        data = {
+            'name': _('Leave Application'),
+            'view_mode': 'form',
+            'view_id': self.env.ref('sarpam.view_employee_leave_application_notification_form').id,
+            'res_model': 'employee.leave.application',
+            'type': 'ir.actions.act_window',
+            'res_id': self.id,
+            'target': 'new'
+        }
+
+        return data
 
     @api.multi
     def cancel_button(self):
@@ -106,6 +133,19 @@ class Overtime(models.Model):
         self.check_rights()
         self.write({'state': 'confirmed'})
 
+        self.app_notification = "Your Over-Time Application in send for approval"
+        data = {
+            'name': _('Leave Application'),
+            'view_mode': 'form',
+            'view_id': self.env.ref('sarpam.view_employee_leave_application_notification_form').id,
+            'res_model': 'employee.leave.application',
+            'type': 'ir.actions.act_window',
+            'res_id': self.id,
+            'target': 'new'
+        }
+
+        return data
+
     @api.multi
     def approve_button(self):
         self.check_rights()
@@ -113,6 +153,19 @@ class Overtime(models.Model):
                 'approved_on': datetime.now().strftime("%Y-%m-%d"),
                 'approved_by': self.env.user.id}
         self.write(data)
+
+        self.app_notification = "{0} Over-Time application is approved".format(self.employee_id.name)
+        data = {
+            'name': _('Leave Application'),
+            'view_mode': 'form',
+            'view_id': self.env.ref('sarpam.view_employee_leave_application_notification_form').id,
+            'res_model': 'employee.leave.application',
+            'type': 'ir.actions.act_window',
+            'res_id': self.id,
+            'target': 'new'
+        }
+
+        return data
 
     @api.multi
     def cancel_button(self):

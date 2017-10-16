@@ -41,7 +41,7 @@
     <menuitem name="State"
               id="menu_human_state"
               action="action_human_state"
-              parent="hospital_hospital"
+              parent="hospital_others"
               sequence="40"/>
 
 </odoo>

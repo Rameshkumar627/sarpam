@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_employee_attendance_form">
+        <field name="name">employee.attendance.form</field>
+        <field name="model">employee.attendance</field>
+        <field name="arch" type="xml">
+            <form string="Time Schedule">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <button name="print_report" class="oe_highlight" string="Calculate End Time" type="object"/>
+                    </group>
+                    <notebook>
+                        <page string="Attendance Info">
+                            <field name="attendance_line_ids">
+                                <tree>
+                                    <field name="employee_id"/>
+                                    <field name="shift"/>
+                                    <field name="expected_from"/>
+                                    <field name="expected_till"/>
+                                    <field name="expected_time"/>
+                                    <field name="actual_from"/>
+                                    <field name="actual_till"/>
+                                    <field name="actual_time"/>
+                                    <field name="day_state"/>
+                                    <field name="comment"/>
+                                    <field name="attendance_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <field name="comment" placeholder="Comment"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_attendance_tree">
+    <field name="name">employee.attendance.tree</field>
+    <field name="model">employee.attendance</field>
+    <field name="arch" type="xml">
+        <tree string="Time Schedule">
+            <field name="date"/>
+            <field name="state"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_attendance">
+        <field name="name">Employee Attendance</field>
+        <field name="res_model">employee.attendance</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Employee Attendance"
+              id="menu_employee_attendance"
+              action="action_employee_attendance"
+              parent="hospital_hospital"
+              sequence="20"/>
+
+</odoo>

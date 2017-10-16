@@ -39,7 +39,7 @@
     <menuitem name="Country"
               id="menu_human_country"
               action="action_human_country"
-              parent="hospital_hospital"
+              parent="hospital_others"
               sequence="40"/>
 
 </odoo>

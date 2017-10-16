@@ -39,7 +39,7 @@
     <menuitem name="Course"
               id="menu_human_course"
               action="action_human_course"
-              parent="hospital_hospital"
+              parent="hospital_others"
               sequence="40"/>
 
 </odoo>

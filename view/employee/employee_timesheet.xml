@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_employee_timesheet_form">
+        <field name="name">employee.timesheet.form</field>
+        <field name="model">employee.timesheet</field>
+        <field name="arch" type="xml">
+            <form string="Employee Timesheet">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="employee_id"/>
+                        <field name="state"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_employee_timesheet_tree">
+    <field name="name">employee.timesheet.tree</field>
+    <field name="model">employee.timesheet</field>
+    <field name="arch" type="xml">
+        <tree string="Employee Timesheet">
+            <field name="date"/>
+            <field name="employee_id"/>
+            <field name="state"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_employee_timesheet">
+        <field name="name">Employee Timesheet</field>
+        <field name="res_model">employee.timesheet</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Employee Timesheet"
+              id="menu_employee_timesheet"
+              action="action_employee_timesheet"
+              parent="hospital_hospital"
+              sequence="30"/>
+
+</odoo>

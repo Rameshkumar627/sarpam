@@ -39,7 +39,7 @@
     <menuitem name="Employee Type"
               id="menu_employee_type"
               action="action_employee_type"
-              parent="hospital_hospital"
+              parent="hospital_others"
               sequence="40"/>
 
 </odoo>
