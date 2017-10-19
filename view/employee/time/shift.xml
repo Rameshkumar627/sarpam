@@ -51,7 +51,7 @@
     <menuitem name="Employee Shift"
               id="menu_employee_shift"
               action="action_employee_shift"
-              parent="hospital_hospital"
+              parent="hospital_employee"
               sequence="10"/>
 
 </odoo>

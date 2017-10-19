@@ -65,7 +65,7 @@
     <menuitem name="Employee Attendance"
               id="menu_employee_attendance"
               action="action_employee_attendance"
-              parent="hospital_hospital"
+              parent="hospital_employee"
               sequence="20"/>
 
 </odoo>

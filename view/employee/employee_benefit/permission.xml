@@ -60,7 +60,7 @@
     <menuitem name="Permission"
               id="menu_employee_permission"
               action="action_employee_permission"
-              parent="hospital_hospital"
+              parent="hospital_employee"
               sequence="40"/>
 
 </odoo>

@@ -44,7 +44,7 @@
     <menuitem name="Employee Timesheet"
               id="menu_employee_timesheet"
               action="action_employee_timesheet"
-              parent="hospital_hospital"
+              parent="hospital_employee"
               sequence="30"/>
 
 </odoo>

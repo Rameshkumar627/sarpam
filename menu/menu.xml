@@ -26,6 +26,13 @@
     <menuitem name="Product" id="hospital_product" sequence="50" web_icon="sarpam,static/description/product.png"/>
     <menuitem name="Patient" id="hospital_patient" sequence="60" web_icon="sarpam,static/description/patient.png"/>
     <menuitem name="Contact" id="hospital_contact" sequence="70" web_icon="sarpam,static/description/contact.png"/>
+    <menuitem name="Payroll" id="hospital_payroll" sequence="80" web_icon="sarpam,static/description/contact.png"/>
+
+    <menuitem name="Payroll"
+              parent="hospital_payroll"
+              id="payroll_management"
+              sequence="80"
+              web_icon="sarpam,static/description/contact.png"/>
 
     <menuitem name="Others" id="hospital_others" sequence="80" web_icon="sarpam,static/description/contact.png"/>
 

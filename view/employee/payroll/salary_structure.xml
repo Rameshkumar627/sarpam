@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_salary_structure_form">
+        <field name="name">salary.structure.form</field>
+        <field name="model">salary.structure</field>
+        <field name="arch" type="xml">
+            <form string="Salary Structure">
+                <sheet>
+                    <separator string="Salary Structure" style="text-align:center;"/>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                    </group>
+                    <notebook>
+                        <page string="Salary Rules">
+                            <field name="salary_rule_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="sequence"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_salary_structure_tree">
+    <field name="name">salary.structure.tree</field>
+    <field name="model">salary.structure</field>
+    <field name="arch" type="xml">
+        <tree string="Salary Structure">
+            <field name="name"/>
+            <field name="code"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_salary_structure">
+        <field name="name">Salary Structure</field>
+        <field name="res_model">salary.structure</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a Plant Wise Location.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Salary Structure"
+              id="menu_salary_structure"
+              action="action_salary_structure"
+              parent="payroll_management"
+              sequence="10"/>
+
+</odoo>

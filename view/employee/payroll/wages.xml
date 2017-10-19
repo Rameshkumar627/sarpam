@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_salary_wages_form">
+        <field name="name">salary.wages.form</field>
+        <field name="model">salary.wages</field>
+        <field name="arch" type="xml">
+            <form string="Employee Wages">
+                <sheet>
+                    <separator string="Salary Wage" style="text-align:center;"/>
+                    <group>
+                        <field name="name"/>
+                        <field name="salary_structure"/>
+                        <field name="wage"/>
+                        <field name="type"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_salary_wages_tree">
+    <field name="name">salary.wages.tree</field>
+    <field name="model">salary.wages</field>
+    <field name="arch" type="xml">
+        <tree string="Employee Wages">
+            <field name="name"/>
+            <field name="wage"/>
+            <field name="type"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_salary_wages">
+        <field name="name">Employee Wages</field>
+        <field name="res_model">salary.wages</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Employee Wages"
+              id="menu_salary_wages"
+              action="action_salary_wages"
+              parent="payroll_management"
+              sequence="30"/>
+
+</odoo>

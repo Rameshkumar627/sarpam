@@ -65,7 +65,7 @@
     <menuitem name="Leave Application"
               id="menu_employee_leave_application"
               action="action_employee_leave_application"
-              parent="hospital_hospital"
+              parent="hospital_employee"
               sequence="40"/>
 
     <!--Warning View-->

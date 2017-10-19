@@ -133,7 +133,7 @@ class PaySlipDataLine(models.Model):
     _name = 'pay.slip.data.line'
 
     name = fields.Many2one(comodel_name='payslip.info', string='Data', required=True)
-    value = fields.Float(string='Value')
+    value = fields.Float(string='Value', readonly=True)
 
     pay_slip_id = fields.Many2one(comodel_name='pay.slip', string='Pay Slip')
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_salary_batch_form">
+        <field name="name">salary.batch.form</field>
+        <field name="model">salary.batch</field>
+        <field name="arch" type="xml">
+            <form string="Pay Slip Badges">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="from_date"/>
+                        <field name="till_date"/>
+                        <button name="pay_slip_create" string="Create Payslip" type="object"/>
+                        <!--<button name="pay_slip_create" string="Generate Payslip" type="object"/>-->
+                    </group>
+                    <notebook>
+                        <page string="Employees">
+                            <field name="employee_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="salary_batch_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_salary_batch_tree">
+    <field name="name">salary.batch.tree</field>
+    <field name="model">salary.batch</field>
+    <field name="arch" type="xml">
+        <tree string="Pay Slip Badges">
+            <field name="name"/>
+            <field name="from_date"/>
+            <field name="till_date"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_salary_batch">
+        <field name="name">Pay Slip Badges</field>
+        <field name="res_model">salary.batch</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a Plant Wise Location.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Pay Slip Badges"
+              id="menu_salary_batch"
+              action="action_salary_batch"
+              parent="payroll_management"
+              sequence="20"/>
+
+</odoo>

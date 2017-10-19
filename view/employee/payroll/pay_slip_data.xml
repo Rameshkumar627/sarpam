@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_payslip_info_form">
+        <field name="name">payslip.info.form</field>
+        <field name="model">payslip.info</field>
+        <field name="arch" type="xml">
+            <form string="Pay Slip Data">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_payslip_info_tree">
+    <field name="name">payslip.info.tree</field>
+    <field name="model">payslip.info</field>
+    <field name="arch" type="xml">
+        <tree string="Pay Slip Data" editable="bottom">
+            <field name="name"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_payslip_info">
+        <field name="name">Pay Slip Data</field>
+        <field name="res_model">payslip.info</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Pay Slip Data"
+              id="menu_payslip_info"
+              action="action_payslip_info"
+              parent="payroll_management"
+              sequence="10"/>
+
+</odoo>

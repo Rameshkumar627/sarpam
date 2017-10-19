@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--form view-->
+    <record model="ir.ui.view" id="view_pay_slip_form">
+        <field name="name">pay.slip.form</field>
+        <field name="model">pay.slip</field>
+        <field name="arch" type="xml">
+            <form string="Pay Slip">
+                <header>
+                    <button name="on_execution" string="Calculate" type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="from_date"/>
+                            <field name="till_date"/>
+                        </group>
+                        <group>
+                            <field name="salary_structure"/>
+                            <field name="salary_setting"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detailed Info">
+                            <field name="pay_slip_lines" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="alternate_name"/>
+                                    <field name="rule"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Attendance Info">
+                            <field name="pay_slip_data_lines" readonly="1">
+                                <tree>
+                                    <field name="name" readonly="1"/>
+                                    <field name="value" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_pay_slip_tree">
+    <field name="name">pay.slip.tree</field>
+    <field name="model">pay.slip</field>
+    <field name="arch" type="xml">
+        <tree string="Pay Slip">
+            <field name="name"/>
+            <field name="from_date"/>
+            <field name="till_date"/>
+        </tree>
+    </field>
+    </record>
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_pay_slip">
+        <field name="name">Pay Slip</field>
+        <field name="res_model">pay.slip</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a Plant Wise Location.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Pay Slip"
+              id="menu_pay_slip"
+              action="action_pay_slip"
+              parent="payroll_management"
+              sequence="10"/>
+
+</odoo>
