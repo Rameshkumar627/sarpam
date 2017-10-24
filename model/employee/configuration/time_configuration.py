@@ -8,7 +8,8 @@ class TimeDelayConfiguration(models.Model):
     _name = 'time.configuration'
 
     name = fields.Char(string='Name')
-    time_delay = fields.Float(string='Time delay')
+    half_day = fields.Float(string='Half Day')
+    full_day = fields.Float(string='Full Day')
 
 
 TimeDelayConfiguration()

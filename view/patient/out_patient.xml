@@ -7,57 +7,61 @@
         <field name="model">out.patient</field>
         <field name="arch" type="xml">
             <form string="Out Patient">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="close_action" string="Close" type="object"/>
+                    <button name="generate_report_action" string="Report" type="object"/>
+                    <button name="update_suggestion" string="Suggestion" type="object"/>
+                </header>
                 <sheet>
                     <separator string="Out Patient" style="text-align:center;"/>
                     <h2><field name="sequence" readonly="1"/></h2>
                     <group col="4">
-                        <field name="patient_id"/>
-                        <field name="patient_uid"/>
-                        <field name="age"/>
-                        <field name="appointment_id"/>
-                        <field name="symptom_ids" widget="many2many_tags"/>
+                        <field name="patient_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                        <field name="patient_uid" readonly="1"/>
+                        <field name="appointment_id" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                        <field name="age" readonly="1"/>
                     </group>
+
                     <notebook>
+                        <page string="Symptoms">
+                            <group>
+                                <field name="symptom_ids" widget="many2many_tags" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                            </group>
+                        </page>
                         <page string="Diagnosis">
-                            <field name="diagnosis_ids">
-                                <tree editable="bottom">
-                                    <field name="name"/>
-                                    <field name="comment"/>
-                                </tree>
-                            </field>
+                            <field name="diagnosis_ids" attrs="{'readonly': [('state', '=', 'closed')]}"/>
                         </page>
                         <page string="Treatment">
                             <separator string="Treatment" style="text-align:center;"/>
                             <group>
-                                <field name="treatment"/>
-                                <field name="next_appointment"/>
-                                <field name="medicine"/>
-                                <field name="scan"/>
-                                <field name="test"/>
+                                <field name="treatment" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="next_appointment" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="scan" attrs="{'readonly': [('state', '=', 'closed')]}"/>
+                                <field name="test" attrs="{'readonly': [('state', '=', 'closed')]}"/>
                             </group>
-                            <field name="medicine_suggestion_ids" attrs="{'invisible': [('medicine', '=', False)]}">
-                                <tree editable="bottom">
-                                    <field name="select"/>
-                                    <field name="medicine_id"/>
-                                </tree>
+
+                            <field name="scan_suggestion_ids" attrs="{'invisible': [('scan', '=', False)], 'readonly': [('state', '=', 'closed')]}">
                             </field>
-                            <field name="scan_suggestion_ids" attrs="{'invisible': [('scan', '=', False)]}">
-                                <tree editable="bottom">
-                                    <field name="select"/>
-                                    <field name="scan_id"/>
-                                </tree>
+                            <field name="test_suggestion_ids" attrs="{'invisible': [('test', '=', False)], 'readonly': [('state', '=', 'closed')]}">
                             </field>
-                            <field name="test_suggestion_ids" attrs="{'invisible': [('test', '=', False)]}">
+                        </page>
+                        <page string="Medicine">
+                            <field name="medicine_suggestion_ids" attrs="{'readonly': [('state', '=', 'closed')]}">
                                 <tree editable="bottom">
-                                    <field name="select"/>
-                                    <field name="test_id"/>
+                                    <field name="name"/>
+                                    <field name="morning"/>
+                                    <field name="afternoon"/>
+                                    <field name="evening"/>
+                                    <field name="days"/>
                                 </tree>
                             </field>
                         </page>
                         <page string="Report">
+                            <field name="report_html" readonly="1"/>
                         </page>
                     </notebook>
-                    <field name="comment" placeholder="Comment"/>
+                    <field name="comment" placeholder="Comment" attrs="{'readonly': [('state', '=', 'closed')]}"/>
                 </sheet>
             </form>
         </field>

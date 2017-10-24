@@ -9,14 +9,44 @@ class EmployeeAttendance(models.Model):
 
     date = fields.Date(string='Date')
     comment = fields.Text(string='Comment')
-    state = fields.Selection([('draft', 'Draft'), ('confirmed', 'Confirmed')], string='State')
+    state = fields.Selection([('draft', 'Draft'),
+                              ('check', 'Check'),
+                              ('confirmed', 'Confirmed')], string='State')
+    checked_on = fields.Date(string='Checked On')
+    checked_by = fields.Many2one(comodel_name='hospital.employee', string='Checked By')
     attendance_line_ids = fields.One2many(comodel_name='employee.attendance.line',
                                           inverse_name='attendance_id',
                                           string='Attendance Line')
 
     @api.multi
-    def calculate_day_status(self):
-        pass
+    def check_button(self):
+        data = {}
+        data['state'] = 'check'
+        attendances = self.attendance_line_ids
+        time_config = self.env['time.configuration'].search([('name', '=', 'Time Delay')])
+        half_day = time_config.half_day
+        full_day = time_config.full_day
+
+        for attendance in attendances:
+            attendance_state = None
+            if (attendance.actual_time >= half_day) and (attendance.actual_time <= full_day):
+                attendance_state = 'half_day'
+            elif attendance.actual_time >= full_day:
+                attendance_state = 'full_day'
+            elif attendance.is_week_off:
+                attendance_state = 'week_off'
+            else:
+                attendance_state = 'absent'
+
+            attendance.write({'day_state': attendance_state})
+
+        self.write(data)
+
+    @api.multi
+    def confirmed_button(self):
+        data = {}
+        data['state'] = 'confirmed'
+        self.write(data)
 
 
 EmployeeAttendance()
@@ -34,6 +64,7 @@ class EmployeeAttendanceLine(models.Model):
     actual_time = fields.Float(string='Actual Time', store=False)
     day_state = fields.Selection([('full_day', 'Full Day'),
                                   ('half_day', 'Half Day'),
+                                  ('week_off', 'Week-Off'),
                                   ('absent', 'Absent')],
                                  string='Day status')
     is_week_off = fields.Boolean(string='Week Off')
