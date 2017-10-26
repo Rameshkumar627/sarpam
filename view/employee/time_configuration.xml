@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Form View-->
+    <record model="ir.ui.view" id="view_time_configuration_form">
+        <field name="name">time.configuration.form</field>
+        <field name="model">time.configuration</field>
+        <field name="arch" type="xml">
+            <form string="Time Configuration">
+                <group>
+                    <field name="name"/>
+                    <field name="half_day"/>
+                    <field name="full_day"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view-->
+    <record model="ir.ui.view" id="view_time_configuration_tree">
+    <field name="name">time.configuration.tree</field>
+    <field name="model">time.configuration</field>
+    <field name="arch" type="xml">
+        <tree string="Time Configuration">
+            <field name="name"/>
+        </tree>
+    </field>
+    </record>
+
+
+    <!--action-->
+    <record model="ir.actions.act_window" id="action_time_configuration">
+        <field name="name">Time Configuration</field>
+        <field name="res_model">time.configuration</field>
+        <field name="view_type">form</field>
+        <field name="limit">20</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Time Configuration"
+              id="menu_time_configuration"
+              action="action_time_configuration"
+              parent="hospital_others"
+              sequence="40"/>
+
+</odoo>

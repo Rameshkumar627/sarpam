@@ -52,6 +52,8 @@
         'view/employee/time/time_sheet.xml',
         'view/employee/time/attendance.xml',
         'view/employee/time/employee_timesheet.xml',
+        'view/employee/time_configuration.xml',
+        'view/employee/time/attendance_report.xml',
         'view/employee/payroll/pay_slip.xml',
         'view/employee/payroll/pay_slip_data.xml',
         'view/employee/payroll/batches.xml',

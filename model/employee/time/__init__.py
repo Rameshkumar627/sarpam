@@ -5,3 +5,4 @@ from . import attendance
 from . import shift
 from . import time_schedule
 from . import time_sheet
+from . import attendance_report

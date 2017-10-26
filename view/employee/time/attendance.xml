@@ -6,8 +6,8 @@
         string="Attendance Report"
         model="employee.attendance"
         report_type="qweb-html"
-        name="shop.reportattendance"
-        file="shop.reportattendance"
+        name="sarpam.reportattendance"
+        file="sarpam.reportattendance"
         menu="False"/>
 
     <template id="reportattendance">

@@ -61,7 +61,7 @@ class EmployeeAttendanceLine(models.Model):
     expected_time = fields.Float(string='Expected Time', compute='get_expected_time', store=False)
     actual_from = fields.Datetime(string='Actual From')
     actual_till = fields.Datetime(string='Actual Till')
-    actual_time = fields.Float(string='Actual Time', store=False)
+    actual_time = fields.Float(string='Actual Time', compute='get_expected_time', store=False)
     day_state = fields.Selection([('full_day', 'Full Day'),
                                   ('half_day', 'Half Day'),
                                   ('week_off', 'Week-Off'),
@@ -79,7 +79,6 @@ class EmployeeAttendanceLine(models.Model):
             self.expected_time = float((expected_till - expected_from).seconds) / 3600
 
         if self.actual_till and self.actual_from:
-            print "ramesh"
             actual_till = datetime.strptime(self.actual_till, "%Y-%m-%d %H:%M:%S")
             actual_from = datetime.strptime(self.actual_from, "%Y-%m-%d %H:%M:%S")
             self.actual_time = float((actual_till - actual_from).seconds) / 3600

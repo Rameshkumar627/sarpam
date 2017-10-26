@@ -9,15 +9,19 @@
             <form string="Time Schedule">
                 <header>
                     <field name="state" widget="statusbar"/>
+                    <button name="check_button" class="oe_highlight"
+                            string="Check" type="object"
+                            attrs="{'invisible': [('state', 'in', ['check', 'confirmed'])]}"/>
+                    <button name="confirmed_button" class="oe_highlight" string="Confirm" type="object"
+                            attrs="{'invisible': [('state', 'in', ['draft', 'confirmed'])]}"/>
                 </header>
                 <sheet>
                     <group>
-                        <field name="date"/>
-                        <button name="print_report" class="oe_highlight" string="Calculate End Time" type="object"/>
+                        <field name="date" readonly="1"/>
                     </group>
                     <notebook>
                         <page string="Attendance Info">
-                            <field name="attendance_line_ids">
+                            <field name="attendance_line_ids" attrs="{'readonly': [('state', '=', 'confirmed')]}">
                                 <tree>
                                     <field name="employee_id"/>
                                     <field name="shift"/>
@@ -34,7 +38,7 @@
                             </field>
                         </page>
                     </notebook>
-                    <field name="comment" placeholder="Comment"/>
+                    <field name="comment" placeholder="Comment" attrs="{'readonly': [('state', '=', 'confirmed')]}"/>
                 </sheet>
             </form>
         </field>

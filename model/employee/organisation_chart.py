@@ -9,168 +9,183 @@ class OrganisationalChart(models.AbstractModel):
 
     @api.multi
     def render_html(self, docids, data=None):
-        print "ramesh"
-        data = '''
-<!doctype html>
-<html>
 
-<head>
-    <title>Bar Chart</title>
-    <script src="http://0.0.0.0:8069/sarpam/static/Chart.bundle.js"></script>
-    <script src="http://0.0.0.0:8069/sarpam/static/utils.js"></script>
-    <style>
-    canvas {
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
+        script = '''<script>
+                    var config = {
+        container: "#basic-example",
+        
+        connectors: {
+            type: 'step'
+        },
+        node: {
+            HTMLclass: 'nodeExample1'
+        }
+    },
+        '''
+        html = '''<!DOCTYPE html>
+                <html>
+                    <head>
+                    <meta charset="utf-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                    <meta name="viewport" content="width=device-width">
+                    <title> Basic example </title>
+                    <link rel="stylesheet" href="/sarpam/static/Treant.css">
+                    <link rel="stylesheet" href="/sarpam/static/basic-example.css">
+                    
+                </head>
+                <body>
+                    <div class="chart" id="basic-example"></div>
+                    <script src="/sarpam/static/raphael.js"></script>
+                    <script src="/sarpam/static/Treant.js"></script>
+                    
+                    <script>
+                    var config = {
+        container: "#basic-example",
+        
+        connectors: {
+            type: 'step'
+        },
+        node: {
+            HTMLclass: 'nodeExample1'
+        }
+    },
+    ceo = {
+        text: {
+            name: "Mark Hill",
+            title: "Chief executive officer",
+            contact: "Tel: 01 213 123 134",
+        },
+        image: "../headshots/2.jpg"
+    },
+
+    cto = {
+        parent: ceo,
+        text:{
+            name: "Joe Linux",
+            title: "Chief Technology Officer",
+        },
+        stackChildren: true,
+        image: "../headshots/1.jpg"
+    },
+    cbo = {
+        parent: ceo,
+        stackChildren: true,
+        text:{
+            name: "Linda May",
+            title: "Chief Business Officer",
+        },
+        image: "../headshots/5.jpg"
+    },
+    cdo = {
+        parent: ceo,
+        text:{
+            name: "John Green",
+            title: "Chief accounting officer",
+            contact: "Tel: 01 213 123 134",
+        },
+        image: "../headshots/6.jpg"
+    },
+    cio = {
+        parent: cto,
+        text:{
+            name: "Ron Blomquist",
+            title: "Chief Information Security Officer"
+        },
+        image: "../headshots/8.jpg"
+    },
+    ciso = {
+        parent: cto,
+        text:{
+            name: "Michael Rubin",
+            title: "Chief Innovation Officer",
+            contact: {val: "we@aregreat.com", href: "mailto:we@aregreat.com"}
+        },
+        image: "../headshots/9.jpg"
+    },
+    cio2 = {
+        parent: cdo,
+        text:{
+            name: "Erica Reel",
+            title: "Chief Customer Officer"
+        },
+        link: {
+            href: "http://www.google.com"
+        },
+        image: "../headshots/10.jpg"
+    },
+    ciso2 = {
+        parent: cbo,
+        text:{
+            name: "Alice Lopez",
+            title: "Chief Communications Officer"
+        },
+        image: "../headshots/7.jpg"
+    },
+    ciso3 = {
+        parent: cbo,
+        text:{
+            name: "Mary Johnson",
+            title: "Chief Brand Officer"
+        },
+        image: "../headshots/4.jpg"
+    },
+    ciso4 = {
+        parent: cbo,
+        text:{
+            name: "Kirk Douglas",
+            title: "Chief Business Development Officer"
+        },
+        image: "../headshots/11.jpg"
     }
-    </style>
-</head>
+    riso4 = {
+        parent: cto,
+        text:{
+            name: "Ramesh Kuamr",
+            title: "Chief Business Development Officer"
+        },
+        image: "https://static.comicvine.com/uploads/scale_small/11/114183/5200279-links_image_4432.jpg"
+    }
 
-<body>
-    <div id="container" style="width: 75%;">
-        <canvas id="canvas"></canvas>
-    </div>
-    
-    <script>
-        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var color = Chart.helpers.color;
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [{
-                label: 'Dataset 1',
-                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-                borderColor: window.chartColors.red,
-                borderWidth: 1,
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ]
-            }, {
-                label: 'Dataset 2',
-                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-                borderColor: window.chartColors.blue,
-                borderWidth: 1,
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ]
-            }]
+    chart_config = [
+        config,
+        ceo,
+        cto,
+        cbo,
+        cdo,
+        cio,
+        ciso,
+        cio2,
+        ciso2,
+        ciso3,
+        ciso4,
+	riso4
+    ];
 
-        };
 
-        window.onload = function() {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myBar = new Chart(ctx, {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    responsive: true,
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Bar Chart'
-                    }
-                }
-            });
-
-        };
-
-        document.getElementById('randomizeData').addEventListener('click', function() {
-            var zero = Math.random() < 0.2 ? true : false;
-            barChartData.datasets.forEach(function(dataset) {
-                dataset.data = dataset.data.map(function() {
-                    return zero ? 0.0 : randomScalingFactor();
-                });
-
-            });
-            window.myBar.update();
-        });
-
-        var colorNames = Object.keys(window.chartColors);
-        document.getElementById('addDataset').addEventListener('click', function() {
-            var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
-            var dsColor = window.chartColors[colorName];
-            var newDataset = {
-                label: 'Dataset ' + barChartData.datasets.length,
-                backgroundColor: color(dsColor).alpha(0.5).rgbString(),
-                borderColor: dsColor,
-                borderWidth: 1,
-                data: []
-            };
-
-            for (var index = 0; index < barChartData.labels.length; ++index) {
-                newDataset.data.push(randomScalingFactor());
-            }
-
-            barChartData.datasets.push(newDataset);
-            window.myBar.update();
-        });
-
-        document.getElementById('addData').addEventListener('click', function() {
-            if (barChartData.datasets.length > 0) {
-                var month = MONTHS[barChartData.labels.length % MONTHS.length];
-                barChartData.labels.push(month);
-
-                for (var index = 0; index < barChartData.datasets.length; ++index) {
-                    //window.myBar.addData(randomScalingFactor(), index);
-                    barChartData.datasets[index].data.push(randomScalingFactor());
-                }
-
-                window.myBar.update();
-            }
-        });
-
-        document.getElementById('removeDataset').addEventListener('click', function() {
-            barChartData.datasets.splice(0, 1);
-            window.myBar.update();
-        });
-
-        document.getElementById('removeData').addEventListener('click', function() {
-            barChartData.labels.splice(-1, 1); // remove the label first
-
-            barChartData.datasets.forEach(function(dataset, datasetIndex) {
-                dataset.data.pop();
-            });
-
-            window.myBar.update();
-        });
-    </script>
-</body>
-
-</html>
-​
-
-'''
-        return data
+                    </script>
+                    <script>
+                        new Treant( chart_config );
+                    </script>
+                </body>
+                </html>'''
+        return html
 
 
 OrganisationalChart()
 
 
-class MakeChart(models.TransientModel):
-    _name = 'make.chart'
+class HospitalEmployeeChart(models.TransientModel):
+    _name = 'hospital.employee.chart'
 
     @api.multi
     def print_report(self):
-        print "ramesh,,"
+
         obj = self.env['hospital.patient'].search([('id', '>', 0)])
         data = self.env['report'].get_action(obj, 'sarpam.organisational_chart', data=None)
-        print data
+
         return data
 
-MakeChart()
+
+HospitalEmployeeChart()
 
 
